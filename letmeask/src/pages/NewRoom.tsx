@@ -1,6 +1,5 @@
 import illustrationImg from '../assets/illustration.svg';
 import logoImg from '../assets/logo.svg';
-import googleIconImg from '../assets/google-icon.svg';
 
 import '../styles/auth.scss';
 import { Button } from '../components/Button';
