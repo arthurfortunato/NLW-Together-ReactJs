@@ -5,21 +5,53 @@ import { RoomCode } from '../components/RoomCode';
 import { useParams } from 'react-router-dom';
 
 import '../styles/room.scss';
+import { FormEvent, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '../hooks/useAuth';
+import { database } from '../services/firebase';
 
 type RoomParams = {
   id: string,
 }
 
 export function Room() {
-
+  const { user } = useAuth();
   const params = useParams<RoomParams>();
+  const [newQuestion, setNewQuestion] = useState('');
+  const roomId = params.id;
+
+  async function handleSendQuestion(event: FormEvent) {
+    event.preventDefault();
+
+    if (newQuestion.trim() === '') {
+      return;
+    }
+
+    if (!user) {
+      toast.error('You must be logged in')
+    }
+
+    const question = {
+      content: newQuestion,
+      user: {
+        name: user?.name,
+        avatar: user?.avatar,
+      },
+      isHighLighted: false,
+      isAnswered: false
+    };
+
+    await database.ref(`rooms/${roomId}/questions`).push(question);
+
+    setNewQuestion('')
+  }
 
   return (
     <div id="page-room">
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
-          <RoomCode code={params.id} />
+          <RoomCode code={roomId} />
         </div>
       </header>
 
@@ -29,14 +61,32 @@ export function Room() {
           <span>4 perguntas</span>
         </div>
 
-        <form>
+        <form onSubmit={handleSendQuestion}>
           <textarea
             placeholder="O que você quer perguntas?"
+            onChange={event => setNewQuestion(event.target.value)}
+            value={newQuestion}
           />
 
           <div className="form-footer">
-            <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
-            <Button type="submit">Enviar pergunta</Button>
+            {user ? (
+              <div className="user-info">
+                <img src={user.avatar} alt={user.name} />
+                <span>{user.name}</span>
+              </div>
+            ) : (
+              <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+            )}
+
+            <div>
+              <Button type="submit" disabled={!user}>
+                Enviar pergunta
+              </Button>
+              <Toaster
+                position="top-right"
+                reverseOrder={false}
+              />
+            </div>
           </div>
         </form>
       </main>

@@ -8,6 +8,7 @@ import '../styles/auth.scss';
 import { Button } from '../components/Button';
 import { database } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
+import toast, { Toaster } from 'react-hot-toast';
 /* import { useAuth } from '../hooks/useAuth';
  */
 export function NewRoom() {
@@ -20,7 +21,7 @@ export function NewRoom() {
     event.preventDefault();
 
     if (newRoom.trim() === '') {
-      alert('Crie o nome da sala')
+      toast.error('Create room name')
       return;
     }
     const roomRef = database.ref('rooms');
@@ -53,9 +54,15 @@ export function NewRoom() {
               onChange={event => setNewRoom(event.target.value)}
               value={newRoom}
             />
-            <Button type="submit">
-              Criar sala
-            </Button>
+            <div>
+              <Button type="submit">
+                Criar sala
+              </Button>
+              <Toaster
+                position="top-right"
+                reverseOrder={false}
+              />
+            </div>
           </form>
 
           <p>

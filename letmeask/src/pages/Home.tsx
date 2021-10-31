@@ -11,6 +11,8 @@ import { useAuth } from '../hooks/useAuth';
 import { FormEvent, useState } from 'react';
 import { database } from '../services/firebase';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 export function Home() {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth()
@@ -28,13 +30,13 @@ export function Home() {
     event.preventDefault();
 
     if (roomCode.trim() === '') {
+      toast.error('Room does not exist')
       return;
     }
 
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      alert('Room does not exists.');
       return;
     }
     history.push(`/rooms/${roomCode}`);
@@ -66,9 +68,15 @@ export function Home() {
               onChange={event => setRoomCode(event.target.value)}
               value={roomCode}
             />
-            <Button type="submit">
-              Entrar na sala
-            </Button>
+            <div>
+              <Button type="submit">
+                Entrar na sala
+              </Button>
+              <Toaster
+                position="top-right"
+                reverseOrder={false}
+              />
+            </div>
           </form>
         </div>
       </main>
