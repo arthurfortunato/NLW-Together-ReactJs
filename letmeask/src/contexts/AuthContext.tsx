@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from '@firebase/auth';
+import { auth } from '../services/firebase';
+import firebase from 'firebase/compat';
 
 
 type AuthContextType = {
@@ -24,7 +25,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    const unsubscribe = getAuth().onAuthStateChanged(user => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const { displayName, photoURL, uid } = user
 
@@ -45,10 +46,9 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
   }, [])
 
   async function signInWithGoogle() {
-    const auth = getAuth();
-    const provider = new GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
 
-    const result = await signInWithPopup(auth, provider)
+    const result = await auth.signInWithPopup(provider)
 
     if (result.user) {
       const { displayName, photoURL, uid } = result.user
