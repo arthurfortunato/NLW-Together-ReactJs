@@ -1,15 +1,16 @@
 import { useHistory } from 'react-router-dom';
 
-import illustrationImg from '../assets/illustration.svg';
-import logoImg from '../assets/logo.svg';
-import googleIconImg from '../assets/google-icon.svg';
+import illustrationImg from '../../assets/illustration.svg';
+import logoImg from '../../assets/logo.svg';
+import googleIconImg from '../../assets/google-icon.svg';
 
-import { Button } from '../components/Button';
+import { Button } from '../../components/Button';
 
-import '../styles/auth.scss';
-import { useAuth } from '../hooks/useAuth';
+import './styles.scss';
+
+import { useAuth } from '../../hooks/useAuth';
 import { FormEvent, useState } from 'react';
-import { database } from '../services/firebase';
+import { database } from '../../services/firebase';
 
 import toast, { Toaster } from 'react-hot-toast';
 
