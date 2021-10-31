@@ -10,6 +10,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import { database } from '../../services/firebase';
+import { Question } from '../../components/Question';
 
 type FirebaseQuestions = Record<string, {
   user: {
@@ -21,7 +22,7 @@ type FirebaseQuestions = Record<string, {
   isHighLighted: boolean;
 }>
 
-type Question = {
+type QuestionType = {
   id: string;
   user: {
     name: string;
@@ -41,7 +42,7 @@ export function Room() {
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState('')
 
   const roomId = params.id;
@@ -136,7 +137,17 @@ export function Room() {
             </div>
           </div>
         </form>
-        {JSON.stringify(questions)}
+        <div className="question-list">
+          {questions.map(question => {
+            return (
+              <Question
+                key={question.id}
+                content={question.content}
+                user={question.user}
+              />
+            )
+          })}
+        </div>
       </main>
     </div>
   )
