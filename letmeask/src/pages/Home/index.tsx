@@ -40,6 +40,12 @@ export function Home() {
     if (!roomRef.exists()) {
       return;
     }
+
+    if (roomRef.val().endedAt) {
+      toast.error('Room already closed')
+      return;
+    }
+
     history.push(`/rooms/${roomCode}`);
   }
 
