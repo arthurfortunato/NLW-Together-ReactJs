@@ -6,19 +6,16 @@
   aside {
     flex: 7;
 
-    background: #835afd;
+    background: #4285f4;
     color: #ffffff;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100vh;
 
     padding: 120px 88px;
-
-    img {
-      max-width: 320px;
-    }
 
     strong {
       font: 700 36px "Poppins", sans-serif;
@@ -27,7 +24,7 @@
     }
 
     p {
-      font-size: 24px;
+      font: 300 24px "Montserrat", sans-serif;
       line-height: 32px;
       margin-top: 16px;
       color: #f8f8f8;
@@ -36,7 +33,6 @@
 
   main {
     flex: 8;
-
     padding: 0 32px;
     display: flex;
     align-items: center;
@@ -140,6 +136,53 @@
       height: 1px;
       background: #a8a8b3 !important;
       margin-left: 16px;
+    }
+  }
+
+  @media (max-width: 1455px) {
+    aside {
+      strong {
+        font: 700 27px "Poppins", sans-serif;
+      }
+
+      p {
+        font: 300 20px "Montserrat", sans-serif;
+      }
+    }
+  }
+
+  @media (max-width: 1250px) {
+    aside {
+      p {
+        font: 300 15px "Montserrat", sans-serif;
+      }
+    }
+  }
+
+  @media (max-width: 1020px) {
+    aside {
+      padding: 90px 60px;
+      strong {
+        font: 700 22px "Poppins", sans-serif;
+      }
+      p {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 825px) {
+    aside {
+      padding: 60px 40px;
+      strong {
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 700px) {
+    aside {
+      display: none;
     }
   }
 }
