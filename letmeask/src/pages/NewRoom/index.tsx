@@ -4,15 +4,15 @@ import { FormEvent, useState } from 'react';
 import illustrationImg from '../../assets/illustration.svg';
 import logoImg from '../../assets/logo.svg';
 
-import './styles.scss';
 import { Button } from '../../components/Button';
 import { database } from '../../services/firebase';
 import { useAuth } from '../../hooks/useAuth';
 import toast, { Toaster } from 'react-hot-toast';
-/* import { useAuth } from '../hooks/useAuth';
- */
+
+import './styles.scss';
+
 export function NewRoom() {
-  /* const { user } = useAuth() */
+
   const { user } = useAuth()
   const history = useHistory();
   const [newRoom, setNewRoom] = useState('')
@@ -35,7 +35,7 @@ export function NewRoom() {
   }
 
   return (
-    <div id="page-auth">
+    <div id="new-room">
       <aside>
         <img src={illustrationImg} alt="ilustração simbolizando perguntas e respostas" />
         <strong>Crie salas de Q&amp;A ao-vivo</strong>

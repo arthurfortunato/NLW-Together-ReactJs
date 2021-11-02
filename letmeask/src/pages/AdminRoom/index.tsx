@@ -8,11 +8,11 @@ import { RoomCode } from '../../components/RoomCode';
 
 import { useParams, useHistory } from 'react-router-dom';
 
-import './styles.scss';
-
 import { Question } from '../../components/Question';
 import { useRoom } from '../../hooks/useRoom';
 import { database } from '../../services/firebase';
+
+import './styles.scss';
 
 type RoomParams = {
   id: string,
@@ -52,7 +52,7 @@ export function AdminRoom() {
   }
 
   return (
-    <div id="page-room">
+    <div id="admin-room">
       <header>
         <div className="content">
           <img src={logoImg} alt="Letmeask" />
