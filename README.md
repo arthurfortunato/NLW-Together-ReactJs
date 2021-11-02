@@ -34,7 +34,7 @@ $ cd letmeask
 Para iniciá-lo, siga os passos abaixo:
 ```bash
 # Instalar as dependências
-$ yarn || npm
+$ yarn || npm install
 
 # Iniciar o projeto
 $ yarn start || npm start
