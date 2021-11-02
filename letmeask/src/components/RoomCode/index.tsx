@@ -2,6 +2,9 @@ import copyImg from '../../assets/copy.svg';
 
 import './styles.scss';
 
+import toast, { Toaster } from 'react-hot-toast';
+
+
 type RoomCodeProps = {
   code: string;
 }
@@ -9,8 +12,13 @@ type RoomCodeProps = {
 export function RoomCode(props: RoomCodeProps) {
   function copyRoomCodeToClipboard() {
     navigator.clipboard.writeText(props.code)
+    toast.success('Copy!')
   }
 
+  <Toaster
+    position="top-right"
+    reverseOrder={false}
+  />
   return (
     <button className="room-code" onClick={copyRoomCodeToClipboard}>
       <div>

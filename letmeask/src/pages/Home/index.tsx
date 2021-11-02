@@ -38,6 +38,7 @@ export function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
+      toast.error('Room does not exist')
       return;
     }
 
